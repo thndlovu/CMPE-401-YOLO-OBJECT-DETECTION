@@ -45,6 +45,11 @@ object detection dataset with 10 classes:
 | YOLOv11s | 0.376 | 0.219 | 0.514 | 0.387 | 9.4 |
 | **YOLOv11m (best)** | **0.508** | **0.310** | **0.594** | **0.511** | 20.0 |
 
+### Visualizations
+![Experiment Comparison](experiments/results/experiment_comparison.png)
+![Version Comparison](experiments/results/version_comparison.png)
+![mAP vs Parameters](experiments/results/map_vs_params.png)
+
 ---
 
 ## Repository Structure

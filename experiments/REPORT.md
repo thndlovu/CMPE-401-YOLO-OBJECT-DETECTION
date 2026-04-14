@@ -92,6 +92,8 @@ All experiments use the same VisDrone dataset and training infrastructure. One v
 | Exp3 (YOLOv11m, 640, 50ep) | 0.445 | 0.266 | 0.576 | 0.449 |
 | Exp4 (YOLOv11m, 832, 100ep) | **0.508** | **0.310** | **0.594** | **0.511** |
 
+![Experiment Comparison](results/experiment_comparison.png)
+
 ### Analysis
 
 **Exp1 - Model Size (Nano vs Small):**
@@ -161,6 +163,9 @@ All models trained under identical conditions:
 | YOLOv10s | 0.378 | 0.220 | 0.502 | 0.390 | 7.2 |
 | **YOLOv11s** | 0.376 | 0.219 | 0.514 | 0.387 | 9.4 |
 | **YOLOv11m (best)** | **0.508** | **0.310** | **0.594** | **0.511** | 20.0 |
+
+![Version Comparison](results/version_comparison.png)
+![mAP vs Parameters](results/map_vs_params.png)
 
 ### Analysis
 At the small model scale (640px, 50 epochs), all YOLO versions perform remarkably similarly - mAP50 ranges from 0.365 to 0.380. This suggests that for VisDrone, the choice of model version matters less than hyperparameter choices like resolution and training duration. 
