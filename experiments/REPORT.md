@@ -3,7 +3,7 @@
 
 ---
 
-## Part I – Baseline Model
+## Part I - Baseline Model
 
 ### Model Configuration
 - **Model:** YOLOv11s (small)
@@ -42,21 +42,17 @@
 
 ---
 
-## Part II – Loss Curve and Fitting Analysis
+## Part II - Loss Curve and Fitting Analysis
 
 ### Training vs Validation Loss
 ![Loss Curves](results/baseline_yolo11s/loss_curves.png)
 ![Metrics Curves](results/baseline_yolo11s/metrics_curves.png)
 
 ### Convergence Behavior
-All three loss components (Box, Class, DFL) show consistent decreasing trends 
-across all 50 epochs for both training and validation sets. Neither curve 
-flattens completely by epoch 50, indicating the model has not fully converged 
-and could benefit from additional training epochs.
+All three loss components (Box, Class, DFL) show consistent decreasing trends across all 50 epochs for both training and validation sets. Neither curve flattens completely by epoch 50, indicating the model has not fully converged and could benefit from additional training epochs.
 
 ### Overfitting Analysis
-The model shows **mild overfitting** in the later epochs. Training loss 
-continues to decrease while validation loss begins to plateau around epoch 35-40.
+The model shows **mild overfitting** in the later epochs. Training loss continues to decrease while validation loss begins to plateau around epoch 35-40.
 This gap between training and validation loss is expected given:
 - **Dataset size:** VisDrone training set contains only 6,471 images, which is 
   relatively small for a complex 10-class detection task
@@ -64,26 +60,19 @@ This gap between training and validation loss is expected given:
   to begin memorizing training patterns
 
 ### Underfitting Analysis
-Early epochs (1-10) show classic underfitting behavior — both training and 
-validation losses are high and the model rapidly improves. This is normal 
-and expected at the start of training.
+Early epochs (1-10) show classic underfitting behavior - both training and validation losses are high and the model rapidly improves. This is normal and expected at the start of training.
 
 ### Key Observations
 - mAP50 improves from 0.21 to 0.376 over 50 epochs
-- Precision (0.514) is notably higher than Recall (0.387), suggesting the 
-  model is conservative in its predictions — when it detects an object it is 
-  usually correct, but it misses many objects
-- Small object classes (bicycle, awning-tricycle) have significantly lower 
-  mAP than large object classes (car, bus), consistent with the challenges 
-  of drone-view small object detection
+- Precision (0.514) is notably higher than Recall (0.387), suggesting the model is conservative in its predictions — when it detects an object it is usually correct, but it misses many objects
+- Small object classes (bicycle, awning-tricycle) have significantly lower mAP than large object classes (car, bus), consistent with the challenges of drone-view small object detection
 
 ---
 
 ## Part III – Structured Experimental Design
 
 ### Experimental Setup
-All experiments use the same VisDrone dataset and training infrastructure.
-One variable is changed at a time to isolate its effect.
+All experiments use the same VisDrone dataset and training infrastructure. One variable is changed at a time to isolate its effect.
 
 | Experiment | Model | Image Size | Epochs | Batch Size |
 |---|---|---|---|---|
@@ -105,36 +94,24 @@ One variable is changed at a time to isolate its effect.
 
 ### Analysis
 
-**Exp1 — Model Size (Nano vs Small):**
-Reducing model size from YOLOv11s to YOLOv11n caused a significant drop in 
-mAP50 from 0.376 to 0.298 (-20.7%). This confirms that model capacity is 
-important for VisDrone's complex dense scenes. The nano model with only 2.6M 
-parameters lacks sufficient capacity to learn the full complexity of 10-class 
-drone-view detection.
+**Exp1 - Model Size (Nano vs Small):**
+Reducing model size from YOLOv11s to YOLOv11n caused a significant drop in mAP50 from 0.376 to 0.298 (-20.7%). This confirms that model capacity is important for VisDrone's complex dense scenes. The nano model with only 2.6M parameters lacks sufficient capacity to learn the full complexity of 10-class drone-view detection.
 
 **Exp2 — Image Resolution (640 vs 832):**
-Increasing resolution from 640 to 832 improved mAP50 from 0.376 to 0.446 
-(+18.6%). This is the most impactful single change tested. Higher resolution 
-preserves more detail for small objects which are a defining challenge of 
-VisDrone. The tradeoff is increased memory usage requiring a reduced batch 
-size from 16 to 8.
+Increasing resolution from 640 to 832 improved mAP50 from 0.376 to 0.446 (+18.6%). This is the most impactful single change tested. Higher resolution preserves more detail for small objects which are a defining challenge of VisDrone. The tradeoff is increased memory usage requiring a reduced batch size from 16 to 8.
 
 **Exp3 — Model Size (Small vs Medium):**
-Upgrading from YOLOv11s to YOLOv11m improved mAP50 from 0.376 to 0.445 
-(+18.4%). The medium model's additional capacity (20M vs 9.4M parameters) 
-allows it to learn more complex feature representations.
+Upgrading from YOLOv11s to YOLOv11m improved mAP50 from 0.376 to 0.445 (+18.4%). The medium model's additional capacity (20M vs 9.4M parameters) allows it to learn more complex feature representations.
 
 ---
 
-## Part IV – Iterative Model Improvement
+## Part IV - Iterative Model Improvement
 
 ### Improvement Cycle
 
 **Baseline:** YOLOv11s, 640px, 50 epochs → mAP50: 0.376
 
-**Hypothesis:** Both resolution and model capacity independently improved 
-performance. Combining them should yield additive gains. Additionally, 
-more epochs are needed since loss curves had not fully converged at epoch 50.
+**Hypothesis:** Both resolution and model capacity independently improved performance. Combining them should yield additive gains. Additionally, more epochs are needed since loss curves had not fully converged at epoch 50.
 
 **Experimental Settings:**
 - Model: YOLOv11m (larger capacity)
@@ -142,8 +119,7 @@ more epochs are needed since loss curves had not fully converged at epoch 50.
 - Epochs: 100 (allow full convergence)
 - Batch Size: 8 (reduced due to memory)
 
-**Controlled Modification:** Three simultaneous changes grounded in findings 
-from Exp2 and Exp3 — resolution, capacity, and training duration.
+**Controlled Modification:** Three simultaneous changes grounded in findings from Exp2 and Exp3 - resolution, capacity, and training duration.
 
 **Evaluation:**
 
@@ -154,8 +130,7 @@ from Exp2 and Exp3 — resolution, capacity, and training duration.
 | Precision | 0.514 | **0.594** | +15.6% |
 | Recall | 0.387 | **0.511** | +32.0% |
 
-**Analysis:** The improvement cycle yielded the best results across all metrics.
-The combination of higher resolution, larger model, and more training epochs 
+**Analysis:** The improvement cycle yielded the best results across all metrics. The combination of higher resolution, larger model, and more training epochs 
 proved highly effective for VisDrone's small object detection challenge.
 
 **Conclusion:** For drone-view object detection with small, dense objects:
@@ -166,7 +141,7 @@ proved highly effective for VisDrone's small object detection challenge.
 
 ---
 
-## Part V – Multi-Version YOLO Comparison
+## Part V - Multi-Version YOLO Comparison
 
 ### Comparison Setup
 All models trained under identical conditions:
@@ -188,18 +163,11 @@ All models trained under identical conditions:
 | **YOLOv11m (best)** | **0.508** | **0.310** | **0.594** | **0.511** | 20.0 |
 
 ### Analysis
-At the small model scale (640px, 50 epochs), all YOLO versions perform 
-remarkably similarly — mAP50 ranges from 0.365 to 0.380. This suggests 
-that for VisDrone, the choice of model version matters less than 
-hyperparameter choices like resolution and training duration.
+At the small model scale (640px, 50 epochs), all YOLO versions perform remarkably similarly - mAP50 ranges from 0.365 to 0.380. This suggests that for VisDrone, the choice of model version matters less than hyperparameter choices like resolution and training duration. 
 
-YOLOv9s achieves the best precision (0.522) at the smallest parameter count 
-(7.2M), making it the most parameter-efficient model at this scale.
+YOLOv9s achieves the best precision (0.522) at the smallest parameter count (7.2M), making it the most parameter-efficient model at this scale.
 
-YOLOv8s edges out YOLOv11s slightly at the same scale (0.380 vs 0.376), 
-though the difference is negligible. YOLOv11's advantage becomes clear when 
-scaled up — YOLOv11m with optimized settings achieves 0.508 mAP50, a 35% 
-improvement over all small-scale competitors.
+YOLOv8s edges out YOLOv11s slightly at the same scale (0.380 vs 0.376), though the difference is negligible. YOLOv11's advantage becomes clear when 
+scaled up - YOLOv11m with optimized settings achieves 0.508 mAP50, a 35% improvement over all small-scale competitors.
 
-YOLOv5su performs worst overall, consistent with it being the oldest 
-architecture in the comparison.
+YOLOv5su performs worst overall, consistent with it being the oldest architecture in the comparison.
