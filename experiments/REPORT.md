@@ -155,14 +155,14 @@ All models trained under identical conditions:
 
 ### Results
 
-| Model | mAP50 | mAP50-95 | Precision | Recall | Params (M) |
-|---|---|---|---|---|---|
-| YOLOv5su | 0.365 | 0.211 | 0.502 | 0.376 | 9.1 |
-| YOLOv8s | 0.380 | 0.219 | 0.519 | 0.388 | 11.1 |
-| YOLOv9s | 0.379 | 0.219 | 0.522 | 0.381 | 7.2 |
-| YOLOv10s | 0.378 | 0.220 | 0.502 | 0.390 | 7.2 |
-| **YOLOv11s** | 0.376 | 0.219 | 0.514 | 0.387 | 9.4 |
-| **YOLOv11m (best)** | **0.508** | **0.310** | **0.594** | **0.511** | 20.0 |
+| Model | mAP50 | mAP50-95 | Precision | Recall | Params (M) | Inference (ms/img) |
+|---|---|---|---|---|---|---|
+| YOLOv5su | 0.365 | 0.211 | 0.502 | 0.376 | 9.1 | 4.2 |
+| YOLOv8s | 0.380 | 0.219 | 0.519 | 0.388 | 11.1 | 0.6 |
+| YOLOv9s | 0.379 | 0.219 | 0.522 | 0.381 | 7.2 | 6.0 |
+| YOLOv10s | 0.378 | 0.220 | 0.502 | 0.390 | 7.2 | 0.4 |
+| YOLOv11s (Baseline) | 0.376 | 0.219 | 0.514 | 0.387 | 9.4 | 5.5 |
+| **YOLOv11m (Best)** | **0.508** | **0.310** | **0.594** | **0.511** | 20.0 | 1.5 |
 
 ![Version Comparison](results/version_comparison.png)
 ![mAP vs Parameters](results/map_vs_params.png)
