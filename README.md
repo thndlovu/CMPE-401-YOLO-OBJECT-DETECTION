@@ -9,7 +9,7 @@ This project implements a complete object detection pipeline using YOLOv11 on th
 
 ## Dataset
 
-[VisDrone2019-DET](https://github.com/VisDrone/VisDrone-Dataset) — drone-view 
+[VisDrone2019-DET](https://github.com/VisDrone/VisDrone-Dataset) - drone-view 
 object detection dataset with 10 classes:
 `pedestrian, people, bicycle, car, van, truck, tricycle, awning-tricycle, bus, motor`
 
