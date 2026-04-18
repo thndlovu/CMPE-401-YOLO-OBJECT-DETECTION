@@ -126,7 +126,7 @@ def convert_split(visdrone_root, output_root, split):
         # Copy image
         shutil.copy2(img_path, out_img_dir / img_path.name)
         
-        # Write label file (even if empty — YOLO expects it)
+        # Write label file (even if empty - YOLO expects it)
         out_lbl = out_lbl_dir / (img_path.stem + '.txt')
         with open(out_lbl, 'w') as f:
             f.write('\n'.join(yolo_lines))

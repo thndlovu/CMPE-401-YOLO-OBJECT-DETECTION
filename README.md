@@ -1,4 +1,4 @@
-# CMPE 401 – Advanced Object Detection and Comparative Study using YOLOv11
+# CMPE 401 - Advanced Object Detection and Comparative Study using YOLOv11
 
 ## Project Overview
 This project implements a complete object detection pipeline using YOLOv11 on the VisDrone dataset. It includes baseline training, structured experiments, iterative model improvements, and a multi-version YOLO comparison.
@@ -132,7 +132,7 @@ python3 scripts/train_comparison.py
 ## Key Findings
 1. **Image resolution** has the highest single impact on VisDrone performance - increasing from 640 to 832px improved mAP50 by 18.6%
 2. **Model capacity** provides complementary gains - YOLOv11m outperforms YOLOv11s by 18.4% at the same resolution
-3. **Training duration** matters - 100 epochs significantly outperforms 50 epochs for larger model+resolution combinations
+3. **Training duration** matters - 100 epochs significantly outperforms 50 epochs for larger model + resolution combinations
 4. All YOLO versions (v5-v11) perform similarly at small scale on VisDrone, suggesting dataset characteristics matter more than architecture version
 5. Small object classes (bicycle, awning-tricycle) remain challenging across all models, highlighting the difficulty of drone-view detection
 

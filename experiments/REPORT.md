@@ -64,12 +64,12 @@ Early epochs (1-10) show classic underfitting behavior - both training and valid
 
 ### Key Observations
 - mAP50 improves from 0.21 to 0.376 over 50 epochs
-- Precision (0.514) is notably higher than Recall (0.387), suggesting the model is conservative in its predictions — when it detects an object it is usually correct, but it misses many objects
+- Precision (0.514) is notably higher than Recall (0.387), suggesting the model is conservative in its predictions - when it detects an object it is usually correct, but it misses many objects
 - Small object classes (bicycle, awning-tricycle) have significantly lower mAP than large object classes (car, bus), consistent with the challenges of drone-view small object detection
 
 ---
 
-## Part III – Structured Experimental Design
+## Part III - Structured Experimental Design
 
 ### Experimental Setup
 All experiments use the same VisDrone dataset and training infrastructure. One variable is changed at a time to isolate its effect.
@@ -99,10 +99,10 @@ All experiments use the same VisDrone dataset and training infrastructure. One v
 **Exp1 - Model Size (Nano vs Small):**
 Reducing model size from YOLOv11s to YOLOv11n caused a significant drop in mAP50 from 0.376 to 0.298 (-20.7%). This confirms that model capacity is important for VisDrone's complex dense scenes. The nano model with only 2.6M parameters lacks sufficient capacity to learn the full complexity of 10-class drone-view detection.
 
-**Exp2 — Image Resolution (640 vs 832):**
+**Exp2 - Image Resolution (640 vs 832):**
 Increasing resolution from 640 to 832 improved mAP50 from 0.376 to 0.446 (+18.6%). This is the most impactful single change tested. Higher resolution preserves more detail for small objects which are a defining challenge of VisDrone. The tradeoff is increased memory usage requiring a reduced batch size from 16 to 8.
 
-**Exp3 — Model Size (Small vs Medium):**
+**Exp3 - Model Size (Small vs Medium):**
 Upgrading from YOLOv11s to YOLOv11m improved mAP50 from 0.376 to 0.445 (+18.4%). The medium model's additional capacity (20M vs 9.4M parameters) allows it to learn more complex feature representations.
 
 ---
@@ -138,7 +138,7 @@ proved highly effective for VisDrone's small object detection challenge.
 **Conclusion:** For drone-view object detection with small, dense objects:
 1. Image resolution has the highest impact per parameter cost
 2. Model capacity provides complementary gains
-3. Allowing full convergence (100 epochs) is important — 50 epochs was 
+3. Allowing full convergence (100 epochs) is important - 50 epochs was 
    insufficient for the more complex model+resolution combination
 
 ---
