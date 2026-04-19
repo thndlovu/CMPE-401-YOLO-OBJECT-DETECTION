@@ -147,5 +147,7 @@ python3 scripts/train_comparison.py
 ---
 
 ## Author
-CMPE 401 - University of British Columbia Okanagan
+**Tawana H. Ndlovu**  
+School of Engineering, University of British Columbia Okanagan  
+CMPE 401 — Self-Defined Project
 
